@@ -1,0 +1,11 @@
+{
+  "name": "vscolorcode",
+  "version": "1.0.0",
+  "description": "Quickly change the color of your vscode window bar",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mike Cronin <mostlyfocusedmike@gmail.com>",
+  "license": "ISC"
+}
