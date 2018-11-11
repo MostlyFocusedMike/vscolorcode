@@ -10,5 +10,17 @@
   "license": "ISC",
   "bin": {
     "vscolor": "./bin/vscolor.js"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MostlyFocusedMike/vscolorcode.git"
+  },
+  "keywords": [
+    "vscode",
+    "color"
+  ],
+  "bugs": {
+    "url": "https://github.com/MostlyFocusedMike/vscolorcode/issues"
+  },
+  "homepage": "https://github.com/MostlyFocusedMike/vscolorcode#readme"
 }

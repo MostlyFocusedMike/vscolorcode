@@ -26,11 +26,15 @@ const colorOptions = {
 }
 
 function setColorStd(color) {
+    console.log('ok')
     if (!fs.existsSync(vscodeDir)){
+        console.log('here it doesn"t exits')
         fs.mkdirSync(vscodeDir);
         fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions[color]))
     } else {
+        console.log('dir exists')
         if (!fs.existsSync(settingsJSON)) fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions[color]))
+        console.log('file should exist')
         const settings = require('../.vscode/settings.json')
         settings[workbenchStr] = {...settings[workbenchStr], ...colorOptions[color][workbenchStr]}
         fs.writeFileSync("./.vscode/settings.json", JSON.stringify(settings))
@@ -60,10 +64,13 @@ function setColorCustom() {
     setColorStd("custom")
 }
 
-exports.setColors = () => {
+function setColors() {
+    console.log('Current working dir: ', process.cwd())
     if (arg1 === "-c") {
         setColorCustom()
     } else {
         setColorStd(arg1)
     }
 }
+
+exports.setColors = setColors
