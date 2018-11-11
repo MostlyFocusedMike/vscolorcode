@@ -1,5 +1,3 @@
-console.log(process.cwd())
-
 const fs = require('fs');
 const vscodeDir = './.vscode';
 const settingsJSON = './.vscode/settings.json'
@@ -27,31 +25,26 @@ const colorOptions = {
     },
 }
 
-function setColorStd() {
+function setColorStd(color) {
     if (!fs.existsSync(vscodeDir)){
         fs.mkdirSync(vscodeDir);
-        fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions[arg1]))
+        fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions[color]))
     } else {
-        if (!fs.existsSync(settingsJSON)) fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions[arg1]))
+        if (!fs.existsSync(settingsJSON)) fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions[color]))
         const settings = require('../.vscode/settings.json')
-        settings[workbenchStr] = {...settings[workbenchStr], ...colorOptions[arg1][workbenchStr]}
+        settings[workbenchStr] = {...settings[workbenchStr], ...colorOptions[color][workbenchStr]}
         fs.writeFileSync("./.vscode/settings.json", JSON.stringify(settings))
     }
 }
 
 function setColorCustom() {
-    let titleBar,
-        activityBar,
-        font = "#FFF"
-    if (process.argv.length === 4) { // bar color, default text color
-        titleBar = `#${process.argv[3]}`
-        activityBar = `#${process.argv[3]}`
-    } else if (process.argv.length === 5) { // title bar color, font color
-        titleBar = `#${process.argv[3]}`
-        activityBar = `#${process.argv[3]}`
+    let titleBar = `#${process.argv[3]}`;
+    let activityBar = `#${process.argv[3]}`;
+    let font = "#FFF";
+    
+    if (process.argv.length === 5) { // title bar color, font color
         font = `#${process.argv[4]}`
     } else if (process.argv.length === 6) { // title bar color, activity bar color, font color
-        titleBar = `#${process.argv[3]}`
         activityBar = `#${process.argv[4]}`
         font = `#${process.argv[5]}`
     }
@@ -64,20 +57,11 @@ function setColorCustom() {
             "statusBar.foreground": "#ccc"
         }
     }
-    console.log('len', process.argv)
-    if (!fs.existsSync(vscodeDir)){
-        fs.mkdirSync(vscodeDir);
-        fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions.custom))
-    } else {
-        if (!fs.existsSync(settingsJSON)) fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions.custom))
-        const settings = require('../.vscode/settings.json')
-        settings[workbenchStr] = {...settings[workbenchStr], ...colorOptions.custom[workbenchStr]}
-        fs.writeFileSync("./.vscode/settings.json", JSON.stringify(settings))
-    }
+    setColorStd("custom")
 }
 
 if (arg1 === "-c") {
     setColorCustom()
 } else {
-    setColorStd()
+    setColorStd(arg1)
 }
