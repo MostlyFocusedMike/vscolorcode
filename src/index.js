@@ -60,8 +60,10 @@ function setColorCustom() {
     setColorStd("custom")
 }
 
-if (arg1 === "-c") {
-    setColorCustom()
-} else {
-    setColorStd(arg1)
+exports.setColors = () => {
+    if (arg1 === "-c") {
+        setColorCustom()
+    } else {
+        setColorStd(arg1)
+    }
 }
