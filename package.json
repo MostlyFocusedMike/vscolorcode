@@ -1,6 +1,6 @@
 {
   "name": "vscolorcode",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Quickly change the color of your vscode window bar",
   "main": "src/index.js",
   "scripts": {
