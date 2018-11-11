@@ -38,7 +38,11 @@ function setColorStd(color) {
             fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions[color]))
         }
         console.log('file should exist')
-        const settings = require('../.vscode/settings.json')
+        try {
+            let settings = require('../.vscode/settings.json')
+        } catch (err) {
+            settings = require('./.vscode/settings.json')
+        }
         settings[workbenchStr] = {...settings[workbenchStr], ...colorOptions[color][workbenchStr]}
         fs.writeFileSync("./.vscode/settings.json", JSON.stringify(settings))
     }
