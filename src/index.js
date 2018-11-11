@@ -27,6 +27,11 @@ const colorOptions = {
 
 function setColorStd(color) {
     console.log('ok')
+    const testFolder = './.vscode';
+
+    fs.readdirSync(testFolder).forEach(file => {
+    console.log(file);
+    })
     if (!fs.existsSync(vscodeDir)){
         console.log('here it doesn"t exits')
         fs.mkdirSync(vscodeDir);
@@ -38,8 +43,9 @@ function setColorStd(color) {
             fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions[color]))
         }
         console.log('file should exist')
+        let settings;
         try {
-            let settings = require('../.vscode/settings.json')
+            settings = require('../.vscode/settings.json')
         } catch (err) {
             settings = require('./.vscode/settings.json')
         }
