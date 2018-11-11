@@ -47,6 +47,7 @@ function setColorStd(color) {
         try {
             settings = require('../.vscode/settings.json')
         } catch (err) {
+            let test = require('../package.json')
             settings = require('./.vscode/settings.json')
         }
         settings[workbenchStr] = {...settings[workbenchStr], ...colorOptions[color][workbenchStr]}
