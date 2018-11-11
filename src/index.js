@@ -45,7 +45,8 @@ function setColorStd(color) {
         console.log('file should exist')
         let settings;
         try {
-            settings = require('../.vscode/settings.json')
+            const contents = fs.readFileSync('./.vscode/settings.json', 'utf8');
+            settings = JSON.parse(contents)
         } catch (err) {
             let test = require('../package.json')
             settings = require('./.vscode/settings.json')
