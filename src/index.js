@@ -33,7 +33,10 @@ function setColorStd(color) {
         fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions[color]))
     } else {
         console.log('dir exists')
-        if (!fs.existsSync(settingsJSON)) fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions[color]))
+        if (!fs.existsSync(settingsJSON)) {
+            console.log('we are writing the file because it does not exist')
+            fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions[color]))
+        }
         console.log('file should exist')
         const settings = require('../.vscode/settings.json')
         settings[workbenchStr] = {...settings[workbenchStr], ...colorOptions[color][workbenchStr]}
