@@ -23,8 +23,8 @@ function alias() {
     console.log('alias vsblue="vscolor blue"')
     console.log('alias vspurple="vscolor purple"')
     console.log('alias vsblack="vscolor black"')
-    console.log('# alias [CUSTOM COLOR HERE]="vscolor -c [TITLE BAR HEX] [ACTIVITY BAR HEX] [FONT HEX]"\n')
-    console.log('alias vsgray="vscolor -c 999 222 000"    # do not use \'#\' with the hex codes')
+    console.log('# alias [CUSTOM COLOR HERE]="vscolor -c [TITLE BAR HEX] [ACTIVITY BAR HEX] [FONT HEX]"')
+    console.log('alias vsgray="vscolor -c 999 222 000"    # do not use \'#\' with the hex codes\n')
 }
 
 function setColorStd(color) {
