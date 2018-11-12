@@ -5,11 +5,47 @@ const workbenchStr = "workbench.colorCustomizations"
 const arg1 = process.argv[2]
 
 const colorOptions = {
+    red: {
+        "workbench.colorCustomizations": {
+            "titleBar.activeForeground": "#fff",
+            "titleBar.activeBackground": "#ab0000",
+            "activityBar.background": "#5e0b0b",
+            "statusBar.background": "#111",
+            "statusBar.foreground": "#ccc"
+        }
+    },
+    pink: {
+        "workbench.colorCustomizations": {
+            "titleBar.activeForeground": "#000",
+            "titleBar.activeBackground": "#f747bd",
+            "activityBar.background": "#de1196",
+            "statusBar.background": "#111",
+            "statusBar.foreground": "#ccc"
+        }
+    },
+    orange: {
+        "workbench.colorCustomizations": {
+            "titleBar.activeForeground": "#000",
+            "titleBar.activeBackground": "#ff8533",
+            "activityBar.background": "#b34700",
+            "statusBar.background": "#111",
+            "statusBar.foreground": "#ccc"
+        }
+    },
+    yellow: {
+        "workbench.colorCustomizations": {
+            "titleBar.activeForeground": "#000",
+            "titleBar.activeBackground": "#ffff1a",
+            "activityBar.background": "#aa9900",
+            "statusBar.background": "#111",
+            "statusBar.foreground": "#ccc"
+        }
+    },
     green: {
         "workbench.colorCustomizations": {
             "titleBar.activeForeground": "#fff",
-            "titleBar.activeBackground": "#009900",
-            "activityBar.background": "#009900",
+            "titleBar.activeBackground": "#00994d",
+            "activityBar.background": "#004d26",
             "statusBar.background": "#111",
             "statusBar.foreground": "#ccc"
         }
@@ -17,8 +53,36 @@ const colorOptions = {
     blue: {
         "workbench.colorCustomizations": {
             "titleBar.activeForeground": "#fff",
-            "titleBar.activeBackground": "#000099",
-            "activityBar.background": "#000099",
+            "titleBar.activeBackground": "#0079d5",
+            "activityBar.background": "#001f33",
+            "statusBar.background": "#111",
+            "statusBar.foreground": "#ccc"
+        }
+    },
+    purple: {
+        "workbench.colorCustomizations": {
+            "titleBar.activeForeground": "#fff",
+            "titleBar.activeBackground": "#993399",
+            "activityBar.background": "#4d194d",
+            "statusBar.background": "#111",
+            "statusBar.foreground": "#ccc"
+        }
+    },
+    black: {
+        "workbench.colorCustomizations": {
+            "titleBar.activeForeground": "#eee",
+            "titleBar.activeBackground": "#050505",
+            "activityBar.background": "#000",
+            "statusBar.background": "#111",
+            "statusBar.foreground": "#ccc"
+        }
+    },
+    white: {
+        "workbench.colorCustomizations": {
+            "titleBar.activeForeground": "#000",
+            "titleBar.activeBackground": "#FFF",
+            "activityBar.background": "#DDD",
+            "activityBar.foreground": "#111",
             "statusBar.background": "#111",
             "statusBar.foreground": "#ccc"
         }
@@ -26,31 +90,12 @@ const colorOptions = {
 }
 
 function setColorStd(color) {
-    console.log('ok')
-    const testFolder = './.vscode';
-
-    fs.readdirSync(testFolder).forEach(file => {
-    console.log(file);
-    })
     if (!fs.existsSync(vscodeDir)){
-        console.log('here it doesn"t exits')
         fs.mkdirSync(vscodeDir);
         fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions[color]))
     } else {
-        console.log('dir exists')
-        if (!fs.existsSync(settingsJSON)) {
-            console.log('we are writing the file because it does not exist')
-            fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions[color]))
-        }
-        console.log('file should exist')
-        let settings;
-        try {
-            const contents = fs.readFileSync('./.vscode/settings.json', 'utf8');
-            settings = JSON.parse(contents)
-        } catch (err) {
-            let test = require('../package.json')
-            settings = require('./.vscode/settings.json')
-        }
+        if (!fs.existsSync(settingsJSON)) fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions[color]));
+        const settings = JSON.parse(fs.readFileSync('./.vscode/settings.json', 'utf8')); // for some reason require() won't work, maybe becuase it's a hidden file? 
         settings[workbenchStr] = {...settings[workbenchStr], ...colorOptions[color][workbenchStr]}
         fs.writeFileSync("./.vscode/settings.json", JSON.stringify(settings))
     }
@@ -80,7 +125,6 @@ function setColorCustom() {
 }
 
 function setColors() {
-    console.log('Current working dir: ', process.cwd())
     if (arg1 === "-c") {
         setColorCustom()
     } else {
