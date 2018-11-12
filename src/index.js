@@ -6,10 +6,25 @@ const colorOptions = require("./colors.json")
 const arg1 = process.argv[2]
 
 function help() {
-    console.log("The standard options are:\nred, orange, yellow, green, blue, purple, or black.")
-    console.log("\nYou can also use the -c option for custom colors:\n\n\tvscolor -c [title bar hex] [activity bar hex] [font hex]\n")
+    console.log("\nThe standard options are:\nred, orange, yellow, green, blue, purple, or black.")
+    console.log("\nYou can also use the '-c' option for custom colors:\n\n\tvscolor -c [TITLE BAR HEX] [ACTIVITY BAR HEX] [FONT HEX]\n")
     console.log("Here is a lighter blue:\n\n\tvscolor -c 4dc3ff 0099e6 FFF\n")
     console.log("Do not include the '#' when listing out the colors\n")
+    console.log("For a list of aliases, use the '--alias' option\n")
+}
+
+function alias() {
+    console.log('Copy the following lines into your profile:\n')
+    console.log('# VSCOLORCODE COLORS')
+    console.log('alias vsred="vscolor red"')
+    console.log('alias vsorange="vscolor orange"')
+    console.log('alias vsyellow="vscolor yellow"')
+    console.log('alias vsgreen="vscolor green"')
+    console.log('alias vsblue="vscolor blue"')
+    console.log('alias vspurple="vscolor purple"')
+    console.log('alias vsblack="vscolor black"')
+    console.log('# alias [CUSTOM COLOR HERE]="vscolor -c [TITLE BAR HEX] [ACTIVITY BAR HEX] [FONT HEX]"\n')
+    console.log('alias vsgray="vscolor -c 999 222 000"    # do not use \'#\' with the hex codes')
 }
 
 function setColorStd(color) {
@@ -58,6 +73,8 @@ function run() {
         setColorCustom()
     } else if (arg1 === "-h" || arg1 === "--help") {
         help() 
+    } else if (arg1 === "--alias") {
+        alias() 
     } else {
         setColorStd(arg1)
     }
