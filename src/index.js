@@ -2,82 +2,8 @@ const fs = require('fs');
 const vscodeDir = './.vscode';
 const settingsJSON = './.vscode/settings.json'
 const workbenchStr = "workbench.colorCustomizations"
+const colorOptions = require("./colors.json")
 const arg1 = process.argv[2]
-
-const colorOptions = {
-    red: {
-        "workbench.colorCustomizations": {
-            "titleBar.activeForeground": "#ddd",
-            "titleBar.activeBackground": "#ab0000",
-            "activityBar.background": "#5e0b0b",
-            "statusBar.background": "#111",
-            "statusBar.foreground": "#ccc"
-        }
-    },
-    pink: {
-        "workbench.colorCustomizations": {
-            "titleBar.activeForeground": "#000",
-            "titleBar.activeBackground": "#f747bd",
-            "activityBar.background": "#de1196",
-            "statusBar.background": "#111",
-            "statusBar.foreground": "#ccc"
-        }
-    },
-    orange: {
-        "workbench.colorCustomizations": {
-            "titleBar.activeForeground": "#000",
-            "titleBar.activeBackground": "#ff8533",
-            "activityBar.background": "#b34700",
-            "statusBar.background": "#111",
-            "statusBar.foreground": "#ccc"
-        }
-    },
-    yellow: {
-        "workbench.colorCustomizations": {
-            "titleBar.activeForeground": "#000",
-            "titleBar.activeBackground": "#ffff1a",
-            "activityBar.background": "#aa9900",
-            "statusBar.background": "#111",
-            "statusBar.foreground": "#ccc"
-        }
-    },
-    green: {
-        "workbench.colorCustomizations": {
-            "titleBar.activeForeground": "#fff",
-            "titleBar.activeBackground": "#00994d",
-            "activityBar.background": "#004d26",
-            "statusBar.background": "#111",
-            "statusBar.foreground": "#ccc"
-        }
-    },
-    blue: {
-        "workbench.colorCustomizations": {
-            "titleBar.activeForeground": "#fff",
-            "titleBar.activeBackground": "#0079d5",
-            "activityBar.background": "#001f33",
-            "statusBar.background": "#111",
-            "statusBar.foreground": "#ccc"
-        }
-    },
-    purple: {
-        "workbench.colorCustomizations": {
-            "titleBar.activeForeground": "#fff",
-            "titleBar.activeBackground": "#993399",
-            "activityBar.background": "#4d194d",
-            "statusBar.background": "#111",
-            "statusBar.foreground": "#ccc"
-        }
-    },
-    black: {
-        "workbench.colorCustomizations": {
-            "titleBar.activeForeground": "#eee",
-            "titleBar.activeBackground": "#050505",
-            "activityBar.background": "#000",
-            "statusBar.background": "#111",
-            "statusBar.foreground": "#ccc"
-        }
-    },
-}
 
 function help() {
     console.log("The standard options are:\nred, orange, yellow, green, blue, purple, or black.")
@@ -127,7 +53,7 @@ function setColorCustom() {
     setColorStd("custom");
 }
 
-function setColors() {
+function run() {
     if (arg1 === "-c") {
         setColorCustom()
     } else if (arg1 === "-h" || arg1 === "--help") {
@@ -137,4 +63,4 @@ function setColors() {
     }
 }
 
-exports.setColors = setColors
+exports.run = run
