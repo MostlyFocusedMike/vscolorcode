@@ -1,4 +1,6 @@
 #!/usr/bin/env node
 
-const vsColor = require('../src')
+const _vsColor = require('../src').vsColor
+const vsColor = new _vsColor;
+
 vsColor.run()

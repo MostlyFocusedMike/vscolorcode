@@ -4,7 +4,7 @@
   "description": "Quickly change the color of your vscode window bar",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Mike Cronin <mostlyfocusedmike@gmail.com>",
   "license": "ISC",
@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/MostlyFocusedMike/vscolorcode/issues"
   },
-  "homepage": "https://github.com/MostlyFocusedMike/vscolorcode#readme"
+  "homepage": "https://github.com/MostlyFocusedMike/vscolorcode#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
 }
