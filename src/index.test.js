@@ -17,6 +17,7 @@ Do not include the '#' when listing out the colors
 For a list of aliases, use the '--alias' option
 `
 
+// bare bones testing
 
 describe('Main test', () => {
     beforeAll(() => {
@@ -57,6 +58,40 @@ describe('Main test', () => {
             this.vsColor.run()
             expect(spy).toHaveBeenCalledWith("blueasdas");
             expect(help).toHaveBeenCalled();
+        })
+    })
+
+    describe('custom colors', () => {
+        beforeEach(() => {
+            this.standard = jest.spyOn(this.vsColor, 'setColorStd');
+            this.custom = jest.spyOn(this.vsColor, 'setColorCustom');
+        })
+        test("It should create custom colors when given the -c option and 1 color", () => {
+            process.argv = ["", "", "-c", "455"]
+            this.vsColor.run()
+            expect(this.vsColor.font).toEqual("#FFF")
+            expect(this.vsColor.titleBar).toEqual("#455")
+            expect(this.vsColor.activityBar).toEqual("#455")
+            expect(this.custom).toHaveBeenCalled();
+            expect(this.standard).toHaveBeenCalledWith("custom");
+        })
+        test("It should create custom colors when given the -c option and 2 colors", () => {
+            process.argv = ["", "", "-c", "455", "000"]
+            this.vsColor.run()
+            expect(this.vsColor.font).toEqual("#000")
+            expect(this.vsColor.titleBar).toEqual("#455")
+            expect(this.vsColor.activityBar).toEqual("#455")
+            expect(this.custom).toHaveBeenCalled();
+            expect(this.standard).toHaveBeenCalledWith("custom");
+        })
+        test("It should create custom colors when given the -c option and 3 colors", () => {
+            process.argv = ["", "", "-c", "455", "777", "000"]
+            this.vsColor.run()
+            expect(this.vsColor.font).toEqual("#000")
+            expect(this.vsColor.titleBar).toEqual("#455")
+            expect(this.vsColor.activityBar).toEqual("#777")
+            expect(this.custom).toHaveBeenCalled();
+            expect(this.standard).toHaveBeenCalledWith("custom");
         })
     })
 

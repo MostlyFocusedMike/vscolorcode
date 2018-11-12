@@ -1,10 +1,13 @@
 const fs = require('fs');
-const vscodeDir = './.vscode';
-const settingsJSON = './.vscode/settings.json';
-const workbenchStr = "workbench.colorCustomizations";
-const colorOptions = require("./colors.json");
 
 class vsColor {
+    constructor() {
+        this.colorOptions = require("./colors.json");
+        this.vscodeDir = './.vscode';
+        this.settingsJSON = './.vscode/settings.json';
+        this.workbenchStr = "workbench.colorCustomizations";
+    }
+    
     help() {
         console.log("\nThe standard options are:\nred, orange, yellow, green, blue, purple, or black.")
         console.log("\nYou can also use the '-c' option for custom colors:\n\n\tvscolor -c [TITLE BAR HEX] [ACTIVITY BAR HEX] [FONT HEX]\n")
@@ -28,39 +31,39 @@ class vsColor {
     }
 
     setColorStd(color) {
-        if (!colorOptions[color]) {
+        if (!this.colorOptions[color]) {
             console.log("\nLooks like that color isn't available.")
             this.help()
             return false;
         }
-        if (!fs.existsSync(vscodeDir)){
-            fs.mkdirSync(vscodeDir);
-            fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions[color]));
+        if (!fs.existsSync(this.vscodeDir)){
+            fs.mkdirSync(this.vscodeDir);
+            fs.writeFileSync("./.vscode/settings.json", JSON.stringify(this.colorOptions[color]));
         } else {
-            if (!fs.existsSync(settingsJSON)) fs.writeFileSync("./.vscode/settings.json", JSON.stringify(colorOptions[color]));
+            if (!fs.existsSync(this.settingsJSON)) fs.writeFileSync("./.vscode/settings.json", JSON.stringify(this.colorOptions[color]));
             const settings = JSON.parse(fs.readFileSync('./.vscode/settings.json', 'utf8')); 
-            settings[workbenchStr] = {...settings[workbenchStr], ...colorOptions[color][workbenchStr]};
+            settings[this.workbenchStr] = {...settings[this.workbenchStr], ...this.colorOptions[color][this.workbenchStr]};
             fs.writeFileSync("./.vscode/settings.json", JSON.stringify(settings));
         }
         return true;
     }
 
     setColorCustom() {
-        let titleBar = `#${process.argv[3]}`;
-        let activityBar = `#${process.argv[3]}`;
-        let font = "#FFF";
+        this.titleBar = `#${process.argv[3]}`;
+        this.activityBar = `#${process.argv[3]}`;
+        this.font = "#FFF";
         
         if (process.argv.length === 5) { // title bar color, font color
-            font = `#${process.argv[4]}`;
+            this.font = `#${process.argv[4]}`;
         } else if (process.argv.length === 6) { // title bar color, activity bar color, font color
-            activityBar = `#${process.argv[4]}`;
-            font = `#${process.argv[5]}`;
+            this.activityBar = `#${process.argv[4]}`;
+            this.font = `#${process.argv[5]}`;
         }
-        colorOptions.custom = {
+        this.colorOptions.custom = {
             "workbench.colorCustomizations": {
-                "titleBar.activeForeground": font,
-                "titleBar.activeBackground": titleBar,
-                "activityBar.background": activityBar,
+                "titleBar.activeForeground": this.font,
+                "titleBar.activeBackground": this.titleBar,
+                "activityBar.background": this.activityBar,
                 "statusBar.background": "#111",
                 "statusBar.foreground": "#ccc"
             }
